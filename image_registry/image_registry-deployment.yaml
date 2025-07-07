@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: registry
-        image: glb:5000/registry:3.0.0
+        image: registry.kube.lan/registry:3.0.0
         ports:
         - containerPort: 5000
         volumeMounts:
