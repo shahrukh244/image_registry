@@ -4,8 +4,7 @@ metadata:
   name: registry-ingress
   namespace: image-registry
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-request-buffering: "off" # Add this line
+    nginx.ingress.kubernetes.io/proxy-body-size: "0" # allow large image uploads
 spec:
   ingressClassName: nginx
   rules:
@@ -19,3 +18,7 @@ spec:
             name: registry
             port:
               number: 5000
+  tls: # Add this section
+  - hosts:
+    - registry.kube.lan
+    secretName: registry-tls-secret # Name of the secret you created
