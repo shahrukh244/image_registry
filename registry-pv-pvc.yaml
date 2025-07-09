@@ -1,0 +1,28 @@
+# registry-pv-pvc.yaml
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: registry-pv
+spec:
+  capacity:
+    storage: 100Gi # Adjust as needed
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany # Or ReadWriteOnce if only one pod will access it
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /var/kubernetes_storage # Your NFS export path
+    server: 10.0.0.100 # Replace with the IP address of your NFS server
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-pvc
+  namespace: image-registry
+spec:
+  accessModes:
+    - ReadWriteMany # Must match PV accessModes
+  resources:
+    requests:
+      storage: 100Gi # Must be less than or equal to PV capacity

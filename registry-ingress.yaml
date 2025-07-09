@@ -1,0 +1,24 @@
+# registry-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  namespace: image-registry
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/client-max-body-size: "0" # Keep this as it's for overall body size
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m" # This is for the backend response size, but good to have a large value
+    # *** NEW: This is crucial for large file uploads/pushes ***
+    nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "0" # Set to 0 for unlimited, or a large value like "1g", "2g"
+spec:
+  rules:
+  - host: registry.kube.lan
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: docker-registry-service
+            port:
+              number: 5000
