@@ -4,7 +4,7 @@ metadata:
   name: registry-ingress
   namespace: image-registry
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"  # allow large image uploads
+    nginx.ingress.kubernetes.io/proxy-body-size: "5G"  # allow large image uploads
 spec:
   ingressClassName: nginx
   rules:
