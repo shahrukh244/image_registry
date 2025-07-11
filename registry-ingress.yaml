@@ -11,6 +11,7 @@ metadata:
     # *** NEW: This is crucial for large file uploads/pushes ***
     nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "0" # Set to 0 for unlimited, or a large value like "1g", "2g"
 spec:
+  ingressClassName: nginx
   rules:
   - host: registry.kube.lan
     http:
