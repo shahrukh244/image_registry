@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: docker-registry
+  name: image-registry-local
   namespace: image-registry
   labels:
-    app: docker-registry
+    app: image-registry-local
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: docker-registry
+      app: image-registry-local
   template:
     metadata:
       labels:
-        app: docker-registry
+        app: image-registry-local
     spec:
       containers:
       - name: registry
@@ -29,4 +29,4 @@ spec:
       volumes:
       - name: registry-storage
         persistentVolumeClaim:
-          claimName: registry-pvc
+          claimName: image-registry-pvc
