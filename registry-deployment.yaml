@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: image-registry-local
+  name: image-registry-deploy
   namespace: image-registry
   labels:
-    app: image-registry-local
+    app: image-registry-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: image-registry-local
+      app: image-registry-deploy
   template:
     metadata:
       labels:
-        app: image-registry-local
+        app: image-registry-deploy
     spec:
       containers:
       - name: registry
