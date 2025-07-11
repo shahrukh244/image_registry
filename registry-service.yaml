@@ -5,7 +5,7 @@ metadata:
   namespace: image-registry
 spec:
   selector:
-    app: image-registry-local
+    app: image-registry-deploy
   ports:
     - protocol: TCP
       port: 5000
